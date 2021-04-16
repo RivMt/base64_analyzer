@@ -1,0 +1,29 @@
+name: base64_analyze
+description: Analyze base64 strings
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: # flutter pub run flutter_launcher_icons:main -f pubspec.yaml
+
+flutter_icons:
+  image_path: "assets/icon/icon-android_foreground.png"
+  # Android
+  android: "launcher_icon"
+  adaptive_icon_foreground: "assets/icon/icon-android_foreground.png"
+  adaptive_icon_background: "#4caf50"
+
+flutter:
+  uses-material-design: true
