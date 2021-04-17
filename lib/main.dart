@@ -10,8 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Base64 Analyzer',
       theme: ThemeData(
+        primarySwatch: Colors.green,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -53,83 +59,85 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: Padding(
-        padding: new EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Wrap(
-              children: [
-                ChoiceChip(
-                  selected: (isEncode),
-                  onSelected: (value) {
-                    isEncode = true;
-                    setState(() {
-                      resetText();
-                    });
-                  },
-                  label: Text('Encode'),
-                ),
-                SizedBox(width: 16,),
-                ChoiceChip(
-                  selected: (!isEncode),
-                  onSelected: (value) {
-                    isEncode = false;
-                    setState(() {
-                      resetText();
-                    });
-                  },
-                  label: Text('Decode'),
-                ),
-              ],
-            ),
-            SizedBox(height: 32,),
-            TextField(
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: inputController,
-              decoration: InputDecoration(
-                  hintText: 'Input here',
-                  labelText: 'Input',
-                  border: OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.paste_outlined),
-                    onPressed: () async {
-                      ClipboardData clipboard = await Clipboard.getData('text/plain');
-                      inputController.text = clipboard.text;
-                      onInputChanged(inputController.text);
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: new EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Wrap(
+                children: [
+                  ChoiceChip(
+                    selected: (isEncode),
+                    onSelected: (value) {
+                      isEncode = true;
+                      setState(() {
+                        resetText();
+                      });
                     },
-                  )
-              ),
-              onChanged: (text) {
-                setState(() {
-                  onInputChanged(text);
-                });
-              },
-            ),
-            SizedBox(height: 32,),
-            Icon(Icons.arrow_downward, color: Theme.of(context).primaryColor,),
-            SizedBox(height: 32,),
-            TextField(
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: outputController,
-              decoration: InputDecoration(
-                  labelText: 'Output',
-                  border: OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.copy_outlined),
-                    onPressed: () {
-                      //Copy
-                      Clipboard.setData(ClipboardData(text: output,));
+                    label: Text('Encode'),
+                  ),
+                  SizedBox(width: 16,),
+                  ChoiceChip(
+                    selected: (!isEncode),
+                    onSelected: (value) {
+                      isEncode = false;
+                      setState(() {
+                        resetText();
+                      });
                     },
-                  )
+                    label: Text('Decode'),
+                  ),
+                ],
               ),
-              onChanged: (text) {
-                outputController.text = output;
-              },
-            ),
-          ],
+              SizedBox(height: 32,),
+              TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: inputController,
+                decoration: InputDecoration(
+                    hintText: 'Input here',
+                    labelText: 'Input',
+                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.paste_outlined),
+                      onPressed: () async {
+                        ClipboardData clipboard = await Clipboard.getData('text/plain');
+                        inputController.text = clipboard.text;
+                        onInputChanged(inputController.text);
+                      },
+                    )
+                ),
+                onChanged: (text) {
+                  setState(() {
+                    onInputChanged(text);
+                  });
+                },
+              ),
+              SizedBox(height: 32,),
+              Icon(Icons.arrow_downward, color: Theme.of(context).primaryColor,),
+              SizedBox(height: 32,),
+              TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                controller: outputController,
+                decoration: InputDecoration(
+                    labelText: 'Output',
+                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.copy_outlined),
+                      onPressed: () {
+                        //Copy
+                        Clipboard.setData(ClipboardData(text: output,));
+                      },
+                    )
+                ),
+                onChanged: (text) {
+                  outputController.text = output;
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
