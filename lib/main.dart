@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               SizedBox(height: 32,),
-              Icon(Icons.arrow_downward, color: Theme.of(context).primaryColor,),
+              Icon(Icons.arrow_downward, color: Theme.of(context).colorScheme.secondary,),
               SizedBox(height: 32,),
               TextField(
                 keyboardType: TextInputType.multiline,
