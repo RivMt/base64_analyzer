@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -102,9 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     suffixIcon: IconButton(
                       icon: Icon(Icons.paste_outlined),
                       onPressed: () async {
-                        ClipboardData clipboard = await Clipboard.getData('text/plain');
-                        inputController.text = clipboard.text;
-                        onInputChanged(inputController.text);
+                        ClipboardData? clipboard = await Clipboard.getData('text/plain');
+                        if (clipboard != null) {
+                          inputController.text = clipboard.text!;
+                          onInputChanged(inputController.text);
+                        }
                       },
                     )
                 ),
